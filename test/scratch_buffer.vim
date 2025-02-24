@@ -8,7 +8,7 @@ endfunction
 function! s:suite.before_each() abort
   " Clean all created scratch files
   for i in range(0, 100000)
-    let file = printf(g:scratch_buffer_tmp_file_pattern i)
+    let file = printf(g:scratch_buffer_tmp_file_pattern, i)
     if !filereadable(expand(file))
       return
     endif
