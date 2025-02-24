@@ -1,0 +1,126 @@
+*scratch-buffer.vim*		The fastest way to open scratch buffers
+
+Author: aiya000
+License: MIT license
+
+==============================================================================
+CONTENTS					*scratch-buffer-contents*
+
+INTRODUCTION			|scratch-buffer-introduction|
+USAGE				|scratch-buffer-usage|
+INTERFACE			|scratch-buffer-interface|
+  VARIABLES			|scratch-buffer-variables|
+  COMMANDS			|scratch-buffer-commands|
+  FUNCTIONS			|scratch-buffer-functions|
+CHANGELOG			|scratch-buffer-changelog|
+
+
+==============================================================================
+INTRODUCTION						*scratch-buffer-introduction*
+
+**No more hassle with file paths!**
+A fastest way to open a instant scratch buffer.
+
+Supercharge with vim-quickrun!
+Combine it with [vim-quickrun](https://github.com/thinca/vim-quickrun)
+to execute code instantly!
+>
+	" Open a TypeScript buffer
+	:ScratchBufferOpen ts
+
+	" Write TypeScript code
+
+	" ...and run it immediately!
+	:QuickRun
+<
+Please see the`scratch-buffer-usage`section for usage of`:ScratchBufferOpen`.
+
+Newer Version:
+https://github.com/aiya000/vim-scratch-buffer
+
+
+==============================================================================
+USAGE						*scratch-buffer-usage*
+
+Open a scratch buffer. Please specify a file extension you want:
+>
+	" Open a markdown buffer
+	:ScratchBufferOpen md
+
+	" Open a markdown buffer by :sp
+	:ScratchBufferOpen md sp
+
+	" Open a markdown buffer by :sp with 3 lines
+	:ScratchBufferOpen md sp 3
+<
+Of course, you can open other file types too:
+>
+	" Open a TypeScript buffer
+	:ScratchBufferOpen ts
+<
+
+==============================================================================
+INTERFACE				*scratch-buffer-interface*
+
+------------------------------------------------------------------------------
+VARIABLES						*scratch-buffer-variables*
+
+*g:scratch_buffer_tmp_file_pattern*
+	Default: '/tmp/vim-scratch-buffer-%d'
+
+	When `ScratchBufferOpen` opens a scratch buffer, it will make a
+	decision based on this.
+	Specifically, `printf($'/tmp/vim-scratch-buffer-%d.{ext}', count)` will
+	opened. `ext` is the first argument of `ScratchBufferOpen`.
+	`count` is the number of currently open scratch buffers +1.
+
+------------------------------------------------------------------------------
+COMMANDS					*scratch-buffer-commands*
+
+						*:ScratchBufferOpen*
+:ScratchBufferOpen {file-extension} [open-method] [buffer-size]
+	Open a scratch buffer with a random file name.
+
+	This opens buffers by the rule
+	described in`g:scratch_buffer_tmp_file_pattern`.
+
+	The opened buffers doesn't`:write`automatically.
+	You can select do`:write`or don't.
+
+	[open-method] is an optional argument, should be`'sp'`or`'vsp'`.
+	Open the buffer onto top if `'sp'`,
+	or open the buffer onto left if`'vsp'`.
+	Please also see`:split`and`:vsplit`.
+	Default value is`'vsp'`.
+
+	[buffer-size] is an optional argument, should be a positive number.
+	`:ScratchBufferOpen`resizes the opened buffer on opened,
+	or doesn't resize if this is omitted.
+
+
+						*:ScratchBufferCleanAllOf*
+:ScratchBufferCleanAllOf [file-extension]
+	Delete all scratch files and buffers that
+	is opened by`:ScratchBufferOpen`.
+
+
+==============================================================================
+FUNCTIONS					*scratch-buffer-functions*
+
+						*scratch_buffer#open()*
+scratch_buffer#open({file-extension}[, open-method][, buffer-size])
+	Same as`:ScratchBufferOpen`.
+
+						*scratch_buffer#clean_all_of()*
+scratch_buffer#clean_all_of({file-extension})
+	Same as`:ScratchBufferCleanAllOf`.
+
+
+==============================================================================
+CHANGELOG					*scratch-buffer-changelog*
+
+Please see https://github.com/aiya000/vim-scratch-buffer/commits/main
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdm=marker
