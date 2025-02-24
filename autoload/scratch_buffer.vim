@@ -16,7 +16,10 @@ function! scratch_buffer#open(file_ext, ...) abort
 
   execute 'silent' open_method file_name
   setl noswapfile
-  execute (open_method ==# 'vsp' ? 'vertical' : '') 'resize' buffer_size
+
+  if buffer_size !=# v:null
+    execute (open_method ==# 'vsp' ? 'vertical' : '') 'resize' buffer_size
+  endif
 endfunction
 
 function! s:find_fresh_tmp_file(pattern) abort
