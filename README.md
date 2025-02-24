@@ -42,7 +42,7 @@ Of course, you can open other file types too!
 ## :gear: Other Features
 
 ```vim
-" Delete all open scratch files and Markdown buffers
+" Delete all scratch files and Markdown buffers that is opened by :ScratchBufferOpen
 :ScratchBufferCleanAllOf md
 ```
 
