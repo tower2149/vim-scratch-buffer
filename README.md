@@ -33,7 +33,7 @@ Of course, you can open other file types too!
 
 ```vim
 " Write TypeScript code...
-:ScratchBufferOpen ts vsp
+:ScratchBufferOpen ts
 
 " ...and run it immediately!
 :QuickRun
