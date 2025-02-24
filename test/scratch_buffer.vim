@@ -51,14 +51,14 @@ function! s:suite.wipes_opened_files_and_buffer() abort
     \ all_buffer_names->scratch_buffer#helper#contains(first_file),
   \ ).not.to_equal(-1)
 
-  const second_file = printf(g:scratch_buffer_tmp_file_pattern, 0) .. '.md'
+  const second_file = printf(g:scratch_buffer_tmp_file_pattern, 1) .. '.md'
   call s:expect(filereadable(second_file)).not.to_equal(1)
   call s:expect(
    \ all_buffer_names->scratch_buffer#helper#contains(second_file),
   \ ).not.to_equal(-1)
 
   " Wipe all
-  ScratchBufferCleanAllOf
+  ScratchBufferCleanAllOf md
   const new_all_buffer_names = scratch_buffer#helper#get_all_buffer_names()
 
   call s:expect(filereadable(first_file)).not.to_equal(1)
