@@ -1,12 +1,24 @@
 # :sparkles: scratch-buffer.vim :sparkles:
 
-:rocket: **No more hassle with file paths!** Instantly open a scratch buffer!
+:rocket: **No more hassle with file paths!** The fastest way to open an instant scratch buffer.
 
 ## :wrench: Quick Start
 
 ```vim
 " Open a random file with Markdown filetype
 :ScratchBufferOpen md
+```
+
+```vim
+" Open a small buffer at the top for quick notes
+:ScratchBufferOpen md sp 5
+```
+
+Of course, you can open other file types too!
+
+```vim
+" Open a TypeScript buffer
+:ScratchBufferOpen ts
 ```
 
 ## :fire: Why scratch-buffer.vim?
@@ -25,6 +37,13 @@
 
 " ...and run it immediately!
 :QuickRun
+```
+
+## :gear: Other Features
+
+```vim
+" Delete all open scratch files and Markdown buffers
+:ScratchBufferCleanAllOf md
 ```
 
 :dart: **Try it now and give it a :star: if you like it!** :wink: :sparkles:
