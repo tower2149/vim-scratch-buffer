@@ -2,6 +2,12 @@
 
 :rocket: **No more hassle with file paths!** The fastest way to open an instant scratch buffer.
 
+- - -
+
+![](./readme/logo.jpg)
+
+- - -
+
 ## :wrench: Quick Start
 
 ```vim
@@ -45,5 +51,3 @@ Of course, you can open other file types too!
 " Delete all scratch files and Markdown buffers that is opened by :ScratchBufferOpen
 :ScratchBufferCleanAllOf md
 ```
-
-:dart: **Try it now and give it a :star: if you like it!** :wink: :sparkles:
