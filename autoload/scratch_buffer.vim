@@ -1,5 +1,4 @@
 scriptencoding utf-8
-scriptversion 3
 
 " Params:
 " - (first argument) {string | undefined} (Optional)
