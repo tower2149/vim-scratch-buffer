@@ -83,7 +83,14 @@ COMMANDS					*scratch-buffer-commands*
 
 	This opens buffers by the rule
 	described in `g:scratch_buffer_tmp_file_pattern`.
-
+	
+	The buffer is opened as a temporary buffer.
+	The following properties:
+>
+	setlocal buftype=nofile
+	setlocal bufhidden=hide
+	setlocal noswapfile
+<
 	The opened buffers don't `:write` automatically.
 	You can choose whether to `:write` or not.
 
@@ -91,7 +98,7 @@ COMMANDS					*scratch-buffer-commands*
 	Open the buffer on top if `'sp'`,
 	or open the buffer on the left if `'vsp'`.
 	Please also see `:split` and `:vsplit`.
-	Default value is `'vsp'`.
+	Default value:`'vsp'`
 
 	[buffer-size] is an optional argument, should be a positive number.
 	`:ScratchBufferOpen` resizes the opened buffer upon opening,

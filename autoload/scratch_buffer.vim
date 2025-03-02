@@ -2,9 +2,9 @@ scriptencoding utf-8
 scriptversion 3
 
 " Params:
-"   file_ext: {string} a file extension without '.', e.g., 'md', 'ts', or 'sh'
-"   (second argument): {'sp' | 'vsp' | undefined} An open method. How to open the new buffer
-"   (third argument): {number} A positive number to `:resize buffer_size`
+" - file_ext {string} a file extension without '.', e.g., 'md', 'ts', or 'sh'
+" - (second argument) {'sp' | 'vsp' | undefined} An open method. How to open the new buffer
+" - (third argument) {number} A positive number to `:resize buffer_size`
 function! scratch_buffer#open(file_ext, ...) abort
   const file_name = s:find_fresh_tmp_file($'{g:scratch_buffer_tmp_file_pattern}.{a:file_ext}')
   if file_name is v:null
@@ -15,7 +15,9 @@ function! scratch_buffer#open(file_ext, ...) abort
   const buffer_size = get(a:000, 1, v:null)
 
   execute 'silent' open_method file_name
-  setl noswapfile
+  setlocal noswapfile
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
 
   if buffer_size !=# v:null
     execute (open_method ==# 'vsp' ? 'vertical' : '') 'resize' buffer_size
@@ -35,7 +37,7 @@ function! s:find_fresh_tmp_file(pattern) abort
 endfunction
 
 " Params:
-"   file_ext: {string} same as scratch_buffer#open's file_ext
+" - file_ext {string} same as scratch_buffer#open's file_ext
 function! scratch_buffer#clean_all_of(file_ext) abort
   const all_buffer_names = scratch_buffer#helper#get_all_buffer_names()
   const pattern = $'{g:scratch_buffer_tmp_file_pattern}.{a:file_ext}'
