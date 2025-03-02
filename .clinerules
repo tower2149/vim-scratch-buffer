@@ -8,8 +8,16 @@
     - For example: `const filetype = get(a:000, 0, v:null)`
 - Don't use `==`. Use `==#` instead
 - Make the tests if you add new features
+- Don't define unnecessary `-nargs=0` in the command definition
 
 ## doc
+
+0. MOST IMPORTANT RULES - NEVER BREAK THESE
+   - NEVER change existing spacing or tabs
+   - NEVER modify text unrelated to the current task
+   - NEVER add indentation to empty lines
+   - NEVER add unnecessary tabs or spaces to existing text
+   - Empty lines must be completely empty (no spaces, no tabs)
 
 1. Text Formatting
    - Normal descriptions are not indented
@@ -24,7 +32,9 @@
    - Empty lines are used to separate logical sections
 
 3. Code Examples
-   - Use tab characters for indentation inside code blocks
+   - IMPORTANT: Always use real tab characters for indentation inside code blocks
+     - Space characters are NOT allowed for indentation
+     - Each line between `>` and `<` MUST be indented with tab
    - Surround code blocks with `>` and `<`
    - Group related commands in the same block
    - Add descriptive comments starting with `"`
@@ -32,25 +42,25 @@
 
 Example:
 ```help
-						*:FooCommand*
+[TAB][TAB][TAB][TAB][TAB][TAB]:FooCommand* | ← [TAB] represents a real tab character. Also Vim indexes must be indented
 :FooCommand [arg1] [arg2]
-	Opens a new foo with specified arguments.
+[TAB]Opens a new foo with specified arguments.   | ← Description is indented with a tab
+                                                 | ← Empty line is completely empty. Must not contain any spaces or tabs
+[TAB][arg1] is an optional argument:
+[TAB]  - When omitted: Uses default value
+[TAB]  - Otherwise: Uses specified value
+>                        | ← Heading '<' character means starting of code block
+[TAB]" Basic usage       | ← Every line inside code block must be indented with tab
+[TAB]:FooCommand
 
-	[arg1] is an optional argument:
-	  - When omitted: Uses default value
-	  - Otherwise: Uses specified value
+[TAB]" With arguments    | ← Comments are also indented with tab
+[TAB]:FooCommand value
+[TAB]:FooCommand value1 value2
+<                        | ← Heading '>' character means ending of code block
+[TAB]Notice the empty lines above and below are completely empty (no spaces or tabs).
 >
-	" Basic usage
-	:FooCommand
-
-	" With specific arguments
-	:FooCommand value
-	:FooCommand value1 value2
-<
-The buffer is opened with certain properties:
->
-	" Default settings
-	setlocal setting1
-	setlocal setting2
+" Buffer settings          | ← Another code block example
+[TAB]setlocal setting1
+[TAB]setlocal setting2    | ← Each line has exactly one tab indent
 <
 ```
