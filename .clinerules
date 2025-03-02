@@ -1,0 +1,56 @@
+## Coding
+
+- Use `const` instead of `let` if available
+- Don't `l:` to define local variables unless necessary
+- Use the conditional operator `foo ? bar : baz` instead of `if` when it is more readable
+- Use the conditional operator `foo ? bar : baz` when it is more readable than `if`
+- Define the name if use optional arguments. e.g., `a:0`, `a:1`, ...
+    - For example: `const filetype = get(a:000, 0, v:null)`
+- Don't use `==`. Use `==#` instead
+- Make the tests if you add new features
+
+## doc
+
+1. Text Formatting
+   - Normal descriptions are not indented
+   - One line should not exceed 78 characters (including tabs)
+   - Break lines at meaningful points, not mechanically at character 78
+   - Keep related information together, use blank lines to separate different topics
+
+2. Structure and Indentation
+   - `*:CommandName*` tags are not indented
+   - Option/argument descriptions are indented with 2 spaces
+   - Additional details under options are indented with 4 spaces
+   - Empty lines are used to separate logical sections
+
+3. Code Examples
+   - Use tab characters for indentation inside code blocks
+   - Surround code blocks with `>` and `<`
+   - Group related commands in the same block
+   - Add descriptive comments starting with `"`
+   - Empty lines between command groups are allowed for clarity
+
+Example:
+```help
+						*:FooCommand*
+:FooCommand [arg1] [arg2]
+	Opens a new foo with specified arguments.
+
+	[arg1] is an optional argument:
+	  - When omitted: Uses default value
+	  - Otherwise: Uses specified value
+>
+	" Basic usage
+	:FooCommand
+
+	" With specific arguments
+	:FooCommand value
+	:FooCommand value1 value2
+<
+The buffer is opened with certain properties:
+>
+	" Default settings
+	setlocal setting1
+	setlocal setting2
+<
+```
