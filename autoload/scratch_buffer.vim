@@ -44,26 +44,20 @@ function! s:find_fresh_tmp_file(pattern) abort
   return v:null
 endfunction
 
-" Params:
-" - file_ext {string} same as scratch_buffer#open's file_ext
-function! scratch_buffer#clean_all_of(file_ext) abort
+" Clean up all scratch buffers and files
+function! scratch_buffer#clean() abort
   const all_buffer_names = scratch_buffer#helper#get_all_buffer_names()
-  const pattern = $'{g:scratch_buffer_tmp_file_pattern}.{a:file_ext}'
 
-  for i in range(0, 100000)
-    let scratch = expand(printf(pattern, i))
-    let file_exists = filereadable(scratch)
-    let buffer_exists = all_buffer_names->scratch_buffer#helper#contains(scratch)
-
-    if !file_exists && !buffer_exists
-      return
-    endif
-
-    if file_exists
+  const base_pattern = printf(g:scratch_buffer_tmp_file_pattern, '*')
+  const files = glob(base_pattern .. '*', 0, 1)
+  for scratch in files
+    " Delete file if exists
+    if filereadable(scratch)
       call delete(scratch)
     endif
 
-    if buffer_exists
+    " Delete buffer if exists
+    if all_buffer_names->scratch_buffer#helper#contains(scratch)
       execute ':bwipe' bufnr(scratch)
     endif
   endfor

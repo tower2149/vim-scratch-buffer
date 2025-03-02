@@ -116,8 +116,8 @@ COMMANDS					*scratch-buffer-commands*
 	or doesn't resize if this is omitted.
 
 
-						*:ScratchBufferCleanAllOf*
-:ScratchBufferCleanAllOf [file-extension]
+						*:ScratchBufferClean*
+:ScratchBufferClean
 	Delete all scratch files and buffers that
 	were opened by `:ScratchBufferOpen`.
 
@@ -134,9 +134,9 @@ scratch_buffer#open([file-extension | --no-filetype][, open-method][, buffer-siz
 	  - Otherwise:
 	    Uses the specified extension as filetype
 
-						*scratch_buffer#clean_all_of()*
-scratch_buffer#clean_all_of({file-extension})
-	Same as `:ScratchBufferCleanAllOf`.
+						*scratch_buffer#clean()*
+						scratch_buffer#clean()
+						Same as `:ScratchBufferClean`.
 
 
 ==============================================================================

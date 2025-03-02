@@ -7,7 +7,7 @@ endfunction
 
 function! s:suite.before_each() abort
   " Clean all created scratch files and buffers
-  ScratchBufferCleanAllOf md
+  ScratchBufferClean
 endfunction
 
 function! s:suite.can_make_buffer() abort
@@ -57,8 +57,8 @@ function! s:suite.wipes_opened_files_and_buffer() abort
    \ all_buffer_names->scratch_buffer#helper#contains(second_file),
   \ ).not.to_equal(-1)
 
-  " Wipe all
-  ScratchBufferCleanAllOf md
+  " Wipe all scratch buffers and files
+  ScratchBufferClean
   const new_all_buffer_names = scratch_buffer#helper#get_all_buffer_names()
 
   call s:expect(filereadable(first_file)).not.to_equal(1)

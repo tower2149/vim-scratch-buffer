@@ -13,8 +13,6 @@ let g:loaded_scratch_buffer = v:true
 " `:ScratchBufferOpen md sp 5`
 command! -bar -nargs=* ScratchBufferOpen call scratch_buffer#open(<f-args>)
 
-" Example:
-" `:ScratchBufferCleanAllOf md`
-command! -bar -nargs=1 ScratchBufferCleanAllOf call scratch_buffer#clean_all_of(<q-args>)
+command! -bar -nargs=0 ScratchBufferClean call scratch_buffer#clean()
 
 let g:scratch_buffer_tmp_file_pattern = '/tmp/vim-scratch-buffer-%d'
