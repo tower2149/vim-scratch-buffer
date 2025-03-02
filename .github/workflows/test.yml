@@ -13,13 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     name: Test
     steps:
+      - name: Create vim directory
+        run: mkdir -p $HOME/.vim
+
       - uses: actions/checkout@v4
-        path: ~/.vim/vim-scratch-buffer
+
+      - name: Copy repository to vim directory
+        run: |
+          cp -r . $HOME/.vim/vim-scratch-buffer/
+          ls -la $HOME/.vim/vim-scratch-buffer/
 
       - uses: rhysd/action-setup-vim@v1
 
       - name: Clone themis
-        run: git clone https://github.com/thinca/vim-themis ~/.vim/bundle/vim-themis
+        run: git clone https://github.com/thinca/vim-themis $HOME/.vim/bundle/vim-themis
 
       - name: Run test
-        run: ~/.vim/bundle/vim-themis/bin/themis ~/.vim/vim-scratch-buffer/test --reporter spec
+        run: $HOME/.vim/bundle/vim-themis/bin/themis $HOME/.vim/vim-scratch-buffer/test --reporter spec
