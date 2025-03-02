@@ -29,6 +29,7 @@ to execute code instantly!
 	:ScratchBufferOpen ts
 
 	" Write TypeScript code
+	" ...
 
 	" ...and run it immediately!
 	:QuickRun
@@ -42,13 +43,17 @@ https://github.com/aiya000/vim-scratch-buffer
 ==============================================================================
 USAGE						*scratch-buffer-usage*
 
-Open a scratch buffer. Please specify a file extension you want:
+Open a scratch buffer with or without a file extension:
 >
+	" Open a new scratch buffer without file extension and filetype
+	:ScratchBufferOpen
+	:ScratchBufferOpen --no-file-ext
+
 	" Open a markdown buffer
 	:ScratchBufferOpen md
 
-	" Open a markdown buffer with :sp
-	:ScratchBufferOpen md sp
+	" Open a buffer without file extension and filetype with :sp and 3 lines
+	:ScratchBufferOpen --no-file-ext sp 3
 
 	" Open a markdown buffer with :sp and 3 lines
 	:ScratchBufferOpen md sp 3
@@ -78,11 +83,17 @@ VARIABLES						*scratch-buffer-variables*
 COMMANDS					*scratch-buffer-commands*
 
 						*:ScratchBufferOpen*
-:ScratchBufferOpen {file-extension} [open-method] [buffer-size]
+:ScratchBufferOpen [file-extension | --no-file-ext] [open-method] [buffer-size]
 	Open a scratch buffer with a random file name.
-
+	
 	This opens buffers by the rule
 	described in `g:scratch_buffer_tmp_file_pattern`.
+	
+	[file-extension] is an optional argument:
+	  - When omitted or --no-file-ext is specified:
+	    Creates a buffer without file extension and filetype
+	  - Otherwise:
+	    Uses the specified extension (e.g., 'md', 'ts') as filetype
 	
 	The buffer is opened as a temporary buffer.
 	The following properties:
@@ -115,8 +126,13 @@ COMMANDS					*scratch-buffer-commands*
 FUNCTIONS					*scratch-buffer-functions*
 
 						*scratch_buffer#open()*
-scratch_buffer#open({file-extension}[, open-method][, buffer-size])
-	Same as `:ScratchBufferOpen`.
+scratch_buffer#open([file-extension | --no-filetype][, open-method][, buffer-size])
+	Same as `:ScratchBufferOpen`. Creates a buffer with or without
+	filetype based on the first argument:
+	  - When an empty string or`'--no-file-ext'`is specified:
+	    Creates a buffer without file extension and filetype
+	  - Otherwise:
+	    Uses the specified extension as filetype
 
 						*scratch_buffer#clean_all_of()*
 scratch_buffer#clean_all_of({file-extension})

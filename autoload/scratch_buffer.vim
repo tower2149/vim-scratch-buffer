@@ -2,17 +2,25 @@ scriptencoding utf-8
 scriptversion 3
 
 " Params:
-" - file_ext {string} a file extension without '.', e.g., 'md', 'ts', or 'sh'
-" - (second argument) {'sp' | 'vsp' | undefined} An open method. How to open the new buffer
-" - (third argument) {number} A positive number to `:resize buffer_size`
-function! scratch_buffer#open(file_ext, ...) abort
-  const file_name = s:find_fresh_tmp_file($'{g:scratch_buffer_tmp_file_pattern}.{a:file_ext}')
+" - (first argument) {string | undefined} (Optional)
+"     - File extension without '.', e.g., 'md', 'ts', or 'sh'
+"     - Or '--no-file-ext' to create a buffer without file extension
+"     - If omitted, creates a buffer without file extension
+" - (second argument) {'sp' | 'vsp' | undefined} (Optional) An open method. How to open the new buffer
+" - (third argument) {number | undefined} (Optional) A positive number to `:resize buffer_size`
+function! scratch_buffer#open(...) abort
+  const file_ext = get(a:000, 0, '--no-file-ext')
+  const file_pattern = (file_ext ==# '--no-file-ext' || file_ext ==# '')
+    \ ? $'{g:scratch_buffer_tmp_file_pattern}'
+    \ : $'{g:scratch_buffer_tmp_file_pattern}.{file_ext}'
+
+  const file_name = s:find_fresh_tmp_file(file_pattern)
   if file_name is v:null
     throw 'No fresh scratch file found.'
   endif
 
-  const open_method = get(a:000, 0, 'vsp')
-  const buffer_size = get(a:000, 1, v:null)
+  const open_method = get(a:000, 1, 'vsp')
+  const buffer_size = get(a:000, 2, v:null)
 
   execute 'silent' open_method file_name
   setlocal noswapfile

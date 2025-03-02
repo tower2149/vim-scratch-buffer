@@ -6,10 +6,12 @@ endif
 let g:loaded_scratch_buffer = v:true
 
 " Example:
+" `:ScratchBufferOpen`
+" `:ScratchBufferOpen --no-filetype`
 " `:ScratchBufferOpen sh`
 " `:ScratchBufferOpen ts vsp`
 " `:ScratchBufferOpen md sp 5`
-command! -bar -nargs=+ ScratchBufferOpen call scratch_buffer#open(<f-args>)
+command! -bar -nargs=* ScratchBufferOpen call scratch_buffer#open(<f-args>)
 
 " Example:
 " `:ScratchBufferCleanAllOf md`

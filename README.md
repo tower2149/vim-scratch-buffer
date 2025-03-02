@@ -11,13 +11,20 @@
 ## :wrench: Quick Start
 
 ```vim
-" Open a random file with Markdown filetype
+" Open a new scratch buffer without file extension and filetype
+:ScratchBufferOpen
+:ScratchBufferOpen --no-file-ext
+```
+
+```vim
+" Open a new scratch buffer with Markdown filetype
 :ScratchBufferOpen md
 ```
 
 ```vim
 " Open a small buffer at the top for quick notes
 :ScratchBufferOpen md sp 5
+:ScratchBufferOpen --no-file-ext sp 5
 ```
 
 Of course, you can open other file types too!
